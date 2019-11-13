@@ -33,4 +33,4 @@ We have found that developing LSIF indexers is much easier than language servers
 
 We are looking forward to working with customers to start producing LSIF data in their build pipelines so that they can enjoy the benefits of fast precise code intelligence.
 
-If you are interested to work on code intelligence at Sourcegraph, [we're hiring](https://hire.withgoogle.com/public/jobs/sourcegraphcom/view/P_AAAAAADAAADP_pY7jAAAXU?trackingTag=sourcegraphCodeIntelBlog)!
+If you are interested to work on code intelligence at Sourcegraph, [we're hiring](https://github.com/sourcegraph/careers)!

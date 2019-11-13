@@ -222,4 +222,4 @@ Of course, since we're Sourcegraph, we would be happy if you try out LSIF with a
 
 Check out [LSIF.dev](https://lsif.dev) for a curated list of LSIF indexers. If you are interested in adding your LSIF indexer to the list, create a pull request [here](https://github.com/lsif/lsif.github.io).
 
-If you enjoyed the material in this article and like working on developer tools, [we're hiring](https://hire.withgoogle.com/public/jobs/sourcegraphcom/view/P_AAAAAADAAADP_pY7jAAAXU?trackingTag=sourcegraphCodeIntelBlog)!
+If you enjoyed the material in this article and like working on developer tools, [we're hiring](https://github.com/sourcegraph/careers)!
