@@ -53,7 +53,7 @@ export default ((props: any) => (
                     />
                     <InContentBlockquote
                         quote="Sourcegraph helps you find out who is using what, making it much easier to deprecate, update or iterate on it. You can easily find who to talk to about the use of a certain component. To be able to answer this question in code is extremely powerful and people call it out all the time."
-                        author="Owen Kim - Senior Software Engineer, Convoy"
+                        author="Owen Kim, Senior Software Engineer, Convoy"
                     />
                     <br />
                 </div>
