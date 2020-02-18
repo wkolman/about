@@ -76,5 +76,5 @@ All engineers should join the following channels (feel free to adjust your notif
 
 ### Regional
 
-- #sf - SF Bay Area
+- #bayarea - SF Bay Area
 - #best-timezone - People whose local timezone is close to UTC
