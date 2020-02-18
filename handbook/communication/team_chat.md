@@ -73,3 +73,8 @@ All engineers should join the following channels (feel free to adjust your notif
 - #dev-ops - discussing incidents and any other ops-related work
 - #buildkite - see notifications about Buildkite / CI failures.
 - #opsgenie - where pager notifications get sent to Slack
+
+### Regional
+
+- #sf - SF Bay Area
+- #best-timezone - People whose local timezone is close to UTC
