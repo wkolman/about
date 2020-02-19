@@ -23,7 +23,7 @@ Our current product priorities are:
 
 - Usability: Sourcegraph is intuitive to use for anyone looking for answers about their code, and easy for admins to configure and maintain.
 - Scalability: Sourcegraph performs reliably at scale for our largest customers.
-- Code change management campaigns: fix and change things across all of your repositories.
+- Code change management campaigns: fix issues and make changes across all of your repositories.
 
 ## In 3-6 months, Sourcegraph will have:
 

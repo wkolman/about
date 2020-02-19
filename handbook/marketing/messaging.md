@@ -44,7 +44,7 @@ Sourcegraph is universal code search, bringing capabilities to every enterprise 
 
 ### Short message (~50 words)
 
-Sourcegraph is universal code search, bringing capabilities to every enterprise that previously only Google and Facebook had (and invested $100Ms in to build). Sourcegraph is the single place in an organization where developers go to find and fix things across their entire codebase.
+Sourcegraph is universal code search, bringing capabilities to every enterprise that previously only Google and Facebook had (and invested $100Ms in to build). Sourcegraph is the single place in an organization where developers go to find answers and fix problems across their entire codebase.
 
 <!--
 
@@ -64,7 +64,7 @@ Sourcegraph is a company that creates software to help every organization build 
 
 ## Press release boilerplate
 
-Sourcegraph empowers all developers with universal code search. Sourcegraph’s mission is to provide tools that let developers from any organization create quality products by leveraging the best technology available. Sourcegraph is built for companies of all sizes, from startups that need a solid foundation for growth, to the world’s largest enterprises with complex security, scaling, and deployment needs. The company is headquartered in San Francisco, CA, and is backed by Redpoint Ventures and Goldcrest Capital. Follow Sourcegraph on Twitter at [@srcgraph](https://twitter.com/srcgraph) or visit [Sourcegraph.com](https://sourcegraph.com).
+Sourcegraph empowers all developers with universal code search. Sourcegraph’s mission is to provide tools that let developers from any organization create quality products by leveraging the best technology available. Sourcegraph is built for companies of all sizes, from startups that need a solid foundation for growth, to the world’s largest enterprises with complex security, scaling, and deployment needs. The company was founded in San Francisco, CA, and is backed by Redpoint Ventures and Goldcrest Capital. Follow Sourcegraph on Twitter at [@srcgraph](https://twitter.com/srcgraph) or visit [Sourcegraph.com](https://sourcegraph.com).
 
 ## [Common customer questions](../sales/common_customer_questions.md)
 

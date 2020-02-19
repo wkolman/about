@@ -137,7 +137,7 @@ export default ((props: any) => (
                     <div className="col-lg-8 mb-6 mb-lg-0">
                         <h1 className="home__intro-header display-3">Universal Code Search</h1>
                         <p className="home__intro-text mt-3 font-weight-light">
-                            Google &amp; Facebook invested $100Ms to build an internal&nbsp;tool for{' '}
+                            Google &amp; Facebook invested $100Ms to build internal&nbsp;tools for{' '}
                             <Link
                                 className="home__intro-text-link home__intro-text-link-1"
                                 to="/product/code-search-navigation"

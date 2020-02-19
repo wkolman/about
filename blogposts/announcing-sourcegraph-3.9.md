@@ -18,7 +18,7 @@ We're excited to announce Sourcegraph 3.9. This release contains lots of behind-
 
 [**🔎 Search queries are now literal (not regexp) by default**](#search-queries-are-now-literal-not-regexp-by-default)
 
-[**🤖 Manage cross-repository PR campaigns**](#manage-cross-repository-pr-campaigns)
+[**🤖 Cross-repository code change management**](#cross-repository-code-change-management)
 
 [**📊 Monitor the health of your Sourcegraph instance**](#monitor-the-health-of-your-sourcegraph-instance)
 
