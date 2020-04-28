@@ -11,6 +11,7 @@
 - [Continuous releasability](continuous_releasability.md)
 - [Commit message guidelines](commit_messages.md)
 - [Incidents](incidents.md)
+- [Security Vulnerability Incidents](security_vulnerability_incidents.md)
 - [Releases](releases/index.md)
   - [Release issue template](releases/release_issue_template.md)
 - [Deployments](deployments.md)
