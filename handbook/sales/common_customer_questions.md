@@ -83,6 +83,10 @@ The built-in (non-universal) code search functionality of many code hosts (inclu
 >
 > We initially considered having Sourcegraph use Elasticsearch under the hood. But we decided to build our own search that is optimized for code, because code is a very special kind of data with meaningful structure, history, and (of course) punctuation and special characters that Elasticsearch was not built to handle.
 
+## How can I spread Sourcegraph in my organization?
+
+See [spreading Sourcegraph within organizations](spreading_sourcegraph.md)
+
 ## Needs answer
 
 - What’s the recommended resource provisioning on our end for optimal search performance at scale?
