@@ -54,6 +54,7 @@ export default class Layout extends React.PureComponent<LayoutProps> {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
                     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet" />
                 </Helmet>
                 <Header isHome={isHome} isBlog={isBlog} isProductPage={isProductPage} minimal={this.props.minimal} />
                 <section className="d-flex flex-column fill-height">{this.props.children}</section>
