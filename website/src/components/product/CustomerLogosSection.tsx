@@ -141,7 +141,7 @@ export const CustomerLogosSection: React.FunctionComponent<{ trustWhat?: string;
 }) => (
     <div id="customers" className={`customer-logos-section ${className}`}>
         <h3 className="text-center font-weight-light">
-            Engineering teams at these companies use Sourcegraph Universal Code Search
+            Our customers, from startups to Fortune 500s, use Sourcegraph to build software that you use every day.
         </h3>
         <div className="container text-center mt-4 d-flex flex-wrap justify-content-center align-items-center line-height-normal">
             {ITEMS.map((logo, i) =>
