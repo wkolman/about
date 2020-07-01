@@ -79,11 +79,8 @@ const ITEMS: (
         },
     },
     {
-        name: 'Thorn',
-        url: '/external-logos/thorn-logo.svg',
-        link: {
-            url: '/case-studies/we-are-thorn',
-        },
+        name: 'Workiva',
+        url: '/external-logos/workiva-vector-logo.svg',
     },
     {
         name: 'Collective Health',
@@ -105,6 +102,13 @@ const ITEMS: (
         url: '/external-logos/plaid-logo.svg',
     },
     {
+        name: 'Thorn',
+        url: '/external-logos/thorn-logo.svg',
+        link: {
+            url: '/case-studies/we-are-thorn',
+        },
+    },
+    {
         name: 'Expanse',
         url: '/external-logos/expanse-logo.svg',
     },
@@ -123,6 +127,10 @@ const ITEMS: (
     {
         name: 'Thought Machine',
         url: '/external-logos/thought-machine-logo.svg',
+    },
+    {
+        name: 'Spring Venture Group',
+        url: '/external-logos/spring-venture-group.svg',
     },
     {
         name: 'GetYourGuide',
