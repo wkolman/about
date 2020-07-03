@@ -10,7 +10,7 @@ heroImage: /blog/flying-brain.png
 published: true
 ---
 
-TODO: anywhere where "index(ing)" refers to conversion/index processing needs to be updated. "indexing" specifically refers to an indexer running over source code to produce an index. Conversion/processing converts a raw LSIF index into a bundle file which we use to answer queries.
+TODO(efritz): anywhere where "index(ing)" refers to conversion/index processing needs to be updated. "indexing" specifically refers to an indexer running over source code to produce an index. Conversion/processing converts a raw LSIF index into a bundle file which we use to answer queries.
 
 When it comes to developer tools, speed is a critical feature. The difference between a 100ms, 1s, and 10s delay fundamentally alters user psychology—it's the difference between coding at the speed of thought vs. losing focus as your mind wanders while waiting for the UI to respond.
 
@@ -28,19 +28,46 @@ With the guidance of the Go memory and CPU profiler, we implemented optimization
 
 ## Identifying bottlenecks
 
-Premature optimization is the root of all evil, so we initiated our optimization efforts by using a CPU and memory profiler to identify performance bottlenecks in our existing system. To get a sense of the dominating code paths (and what we ended up with after only one month of engineering effort), check out the [3.16](https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-cpu.svg) and [3.17](https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-cpu.svg) CPU sample profiles, as well as the [3.16](https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-allocs.svg) and [3.17](https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-allocs.svg) allocation sample profiles.
+Premature optimization is the root of all evil, so we initiated our optimization efforts by using a CPU and memory profiler to identify performance bottlenecks in our existing system. Here are the CPU and memory allocation profiles we began with:
+
+<table>
+<tr>
+    <th>CPU</th>
+    <th>Memory allocations</th>
+    <th>Heap</th>
+</tr>
+<tr>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-cpu.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-cpu.png"/>
+        </a>
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-allocs.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-allocs.png"/>
+        </a>
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-heap.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-heap.png"/>
+        </a>
+    </td>
+</tr>
+</table>
 
 These profiles revealed a number of hotspots in the code, and we combined these results with a high-level understanding of the system architecture to come up with a list of changes that would have a substantial impact on both indexing and query performance.
-
-<p class="text-center">
-  <img src="https://raw.githubusercontent.com/sourcegraph/sourcegraph/07cc078e9f506fe8a60a205eba67c54f4eb6db18/doc/dev/architecture/precise-code-intel.svg" title="architecture diagram" />
-</p>
 
 These efforts yielded a 2x speedup in query latency, a 2x speedup in indexing latency, and a nearly 50% reduction in memory and disk load, which we'll evaluate in more detail later in this post.
 
 ## Eliminating unnecessary abstraction layers
 
 The CPU profiling revealed a substantial amount of time was being spent in the API server. This service receives the LSIF upload from the API user and writes it to disk. A separate background worker service later converts the on-disk LSIF data into a SQLite bundle. On a user query, the API server receives the requests, queries the bundle manager server, which in turn uses the SQLite bundle to respond to the API server, which then forwards that response to the user.
+
+[TODO(efritz): can you update this paragraph and picture to be in sync with one another?]
+
+<p class="text-center">
+  <img src="https://raw.githubusercontent.com/sourcegraph/sourcegraph/07cc078e9f506fe8a60a205eba67c54f4eb6db18/doc/dev/architecture/precise-code-intel.svg" title="architecture diagram" />
+</p>
 
 The "middleman" nature of the API server when serving user requests was an artifact of the initial architecture of the indexed precise code system. After porting this system to go in 3.16, it became apparent that the API server was a *very* thin wrapper around the bundle manager API, so in 3.17, we decided to remove it altogether.
 
@@ -61,30 +88,35 @@ Overall, the entire process of converting an LSIF index into a bundle file is a 
 1. The line reader reads raw LSIF input line-by-line and passes data to the correlator.
 2. The correlator builds an in-memory representation of the LSIF data and passes it to the canonicalizer.
 3. The canonicalizer deduplicates and denormalizes the in-memory representation.
-4. The pruner removes data that is not viewable within Sourcegraph (e.g., index data for uncommitted files)
+4. The pruner removes data that is not viewable within Sourcegraph (e.g., index data for uncommitted files).
 5. The grouper converts the in-memory representation to the format that will be stored on disk.
 6. The writer serializes this data to disk.
 
 We identified that the reading and writing steps (marshalling, unmarshalling, and I/O) occupied the majority of time spent, which is where we focused our efforts.
 
-### Parallel parsing
+### Parallel JSON parsing
 
-LSIF data is uploaded as JSON, and we can split this JSON into different chunks that can be parsed in parallel. At the end, we assemble the parsed results in their original order.
+Profiling identified JSON parsing as a CPU hotspot, which pointed us to the reader portion of the pipeline. LSIF data is uploaded as JSON that describes the network of nodes and edges that captures the referential structure of code:
 
-Parallelization increases throughput, but of course any speedup is pointless if the subsequent step in the pipeline cannot consume the output fast enough. The [correlator](https://github.com/sourcegraph/sourcegraph/blob/1b35af0dea24a1de748d5c87ccdff148a7391638/cmd/precise-code-intel-worker/internal/correlation/correlate.go#L221) code, which receives each line of the raw LSIF input line-by-line, does basically nothing. It simply asserts the type of the payload based on a vertex or edge label and inserts some identifiers into a map. Watching the top of the heap and allocation profile of the running process showed that the majority of work was happening inside of the `"encoding/json"` package. To ensure that this was really the dominating factor, we removed the calls to the correlator and had the worker simply stream the input into a black hole. The runtime did not change for this portion of the process. This indicated that this was indeed a slow-produce/fast-consumer situation and that increasing the throughput of the JSON parsing phase would decrease the latency of the overall indexing process.
+```
+{"id":"13","type":"vertex","label":"definitionResult"}
+{"id":"14","type":"edge","label":"textDocument/definition","outV":"11","inV":"13"}
+{"id":"15","type":"edge","label":"item","outV":"13","inVs":["10"],"document":"7"}
+{"id":"16","type":"vertex","label":"packageInformation","name":"github.com/sourcegraph/sourcegraph","manager":"gomod","version":"v3.17.0-rc.1-82e67052f048"}
+```
+
+During upload, the reader reads this data and parses it into JSON. We can split the raw JSON into different chunks that can be parsed in parallel (provided we remember to assemble the parsed results at the end in their original order). However, CPU time alone isn't a bulletproof indicator that optimizing a portion of a pipeline will decrease the latency of the pipeline overall. A CPU-intensive segment might very well be producing output faster than the next segment of the pipeline can consume (a fast producer, slow consumer scenario), in which case making the producer even faster would do us no good. To verify that this wasn't the case, we did a quick sanity check by disabling the next step of the pipeline (the correlator) and re-running the pipeline up to that point. This showed no improvement in overall time, which was consistent with the hypothesis that JSON parsing was indeed the bottleneck.
 
 In the implementation, we used channels as bounded queues to break up the parsing into separate jobs that can be processed in parallel. The channel acts as a read-ahead buffer:
 
 ![concurrency diagram](https://storage.googleapis.com/sourcegraph-assets/lsif-reader-parallelism.png)
 
-* The [unmarshaller goroutines](https://github.com/sourcegraph/sourcegraph/blob/0eda838ebbe02021dd1739e3f92bc2fcd9577672/cmd/precise-code-intel-worker/internal/correlation/lsif/lines/reader.go#L65-L72) read lines from an input channel, parse it, and place the result into an output element channel.
-* A [batcher process](https://github.com/sourcegraph/sourcegraph/blob/0eda838ebbe02021dd1739e3f92bc2fcd9577672/cmd/precise-code-intel-worker/internal/correlation/lsif/lines/reader.go#L75-L109) then consumes the items from the element channel in batches, reordering them by input ID to be consistent with the original order in the LSIF data.
+* The [unmarshaller goroutines](https://sourcegraph.com/github.com/sourcegraph/sourcegraph@0eda838ebbe02021dd1739e3f92bc2fcd9577672/-/blob/cmd/precise-code-intel-worker/internal/correlation/lsif/lines/reader.go#L65-72) read lines from an input channel, parse it, and place the result into an output element channel.
+* A [batcher goroutine](https://github.com/sourcegraph/sourcegraph/blob/0eda838ebbe02021dd1739e3f92bc2fcd9577672/cmd/precise-code-intel-worker/internal/correlation/lsif/lines/reader.go#L75-L109) then consumes the items from the element channel in batches, reordering them by input ID to be consistent with the original order in the LSIF data.
 * After the batch receives the expected number of values from the channel, it [sends a signal](https://github.com/sourcegraph/sourcegraph/blob/0eda838ebbe02021dd1739e3f92bc2fcd9577672/cmd/precise-code-intel-worker/internal/correlation/lsif/lines/reader.go#L95-L97) to the unmarshallers to free them to resume work. This signalling procedure ensures that no unmarshaller looks for work past the current batching window (which would be pointless and wasteful).
 * Each completed batch is then [passed](https://github.com/sourcegraph/sourcegraph/blob/0eda838ebbe02021dd1739e3f92bc2fcd9577672/cmd/precise-code-intel-worker/internal/correlation/lsif/lines/reader.go#L104) to the correlator for processing.
 
-<div class="alert alert-success">
-  Commit <a href="https://github.com/sourcegraph/sourcegraph/commit/1e83fa635ade825e39b41031b5bd5809cecc2a69#diff-d8ead48c93da52682080c1e083e3157fR1"><pre>1e83fa6</pre></a> reduced conversion time by 31%.
-</div>
+This change (implemented in commit [1e83fa6](https://github.com/sourcegraph/sourcegraph/commit/1e83fa635ade825e39b41031b5bd5809cecc2a69#diff-d8ead48c93da52682080c1e083e3157fR1)) reduced overall conversion time by 31%.
 
 ### Writing to SQLite in parallel
 
@@ -327,5 +359,54 @@ These last charts show the size of the converted bundle on disk after conversion
 </style>
 
 With all the changes discussed in this post combined, the latency for queries and upload processing has been cut by a factor of two, as has the size of bundles on disk, compared to Sourcegraph 3.15.
+
+<table>
+<tr>
+    <th></th>
+    <th>CPU</th>
+    <th>Memory allocations</th>
+    <th>Heap</th>
+</tr>
+<tr>
+    <td>
+        3.16
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-cpu.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-cpu.png"/>
+        </a>
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-allocs.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-allocs.png"/>
+        </a>
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-heap.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.16-heap.png"/>
+        </a>
+    </td>
+</tr>
+<tr>
+    <td>
+        3.17
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-cpu.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-cpu.png"/>
+        </a>
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-allocs.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-allocs.png"/>
+        </a>
+    </td>
+    <td>
+        <a target="_blank" href="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-heap.svg">
+            <img src="https://storage.googleapis.com/sourcegraph-assets/codeintel-profiles/3.17-heap.png"/>
+        </a>
+    </td>
+</tr>
+</table>
 
 We plan to continue on this path of performance improvements, and the next release will focus specifically on processing multiple bundles in parallel in order to multiply the benefit of these recent performance gains. This is just the latest chapter in our continuing effort to bring fast, precise code navigation to every language, every codebase, and every programmer. If you thought this post was interesting or valuable, we'd appreciate it if you'd share it with others!
