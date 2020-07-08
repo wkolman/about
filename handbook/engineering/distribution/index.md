@@ -6,7 +6,7 @@ The distribution team is responsible for making Sourcegraph easy to deploy, scal
 
 - Slack: #distributioneers channel or @distribution
 - File issues: [team/distribution](https://github.com/sourcegraph/sourcegraph/issues/new?labels=team/distribution) label
-- What we're currently working on: [tracking issue](https://github.com/sourcegraph/sourcegraph/issues?q=is%3Aissue+is%3Aopen+label%3Ateam%2Fdistribution+label%3Atracking+distribution), [roadmap](https://docs.google.com/document/d/1cBsE9801DcBF9chZyMnxRdolqM_1c2pPyGQz15QAvYI/edit#heading=h.mi8zg2ql2uc6)
+- What we're currently working on: [tracking issue](https://github.com/sourcegraph/sourcegraph/issues?q=is%3Aissue+is%3Aopen+label%3Ateam%2Fdistribution+label%3Atracking+distribution), [roadmap](../../product/roadmap.md#distribution)
 
 ## Ownership areas
 

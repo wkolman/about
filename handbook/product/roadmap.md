@@ -108,6 +108,30 @@ section Search
 - Java LSIF indexer :0d
 - Dart LSIF indexer :0d
 
+OLD
+
+- Users know precise code intelligence exists and how to set it up
+- Precise code intel is adopted in private instances
+- Precise code intelligence services are robust
+
+- ⏳ Java LSIF indexer works for [$CUSTOMER](https://app.hubspot.com/contacts/2762526/company/407948923)
+- ⏳ Go LSIF indexer works for [$CUSTOMER](https://app.hubspot.com/contacts/2762526/company/814799425)
+- ⏳ Dart LSIF indexer works for [$CUSTOMER](https://app.hubspot.com/contacts/2762526/company/557475882), see [Slack thread](https://sourcegraph.slack.com/archives/CHXHX7XAS/p1571382911099300)
+- 🏃‍♂️ Support LSIF at customers ([RFC 115 PRIVATE](https://docs.google.com/document/d/1yllbVc5ocQuNNv_vnQ1a-yQcEz-wKiWIHwkUspUzgFg/edit))
+- Create a multi-language indexer that auto-detects project structure (Michael)
+- Make an campaign that adds LSIF configuration for all repositories (Michael)
+- Java LSIF indexer cross-repo support (Chris)
+  - Don’t prioritize until we get feedback from Java
+- Go-to-definition from private Sourcegraph instance to open source libraries on Sourcegraph.com
+- Implement symbol search using data from LSIF
+- Implement dependency search using data from LSIF
+- The most referenced code that you’ve written
+- Preload and style differently the tokens in the current file that have code intel
+
+To prioritize:
+
+- Enable definition and references via search (not by position)
+
 ## Distribution
 
 [Distribution roadmap](https://github.com/sourcegraph/about/pull/1104)
@@ -131,6 +155,8 @@ section Search
 - Scaling of Zoekt :2020-06-20, 0d
 - "Project search" link to help users find real-world usage examples of the library :0d
 - [RFC 164](#) - Compute transitive dependencies :2020-09-01, 0d
+- Improve search performance on Sourcegraph.com
+- Better handling of errors and failure states
 
 ## Web
 
@@ -159,3 +185,21 @@ section Search
 - Scaling of Zoekt :2020-06-20, 0d
 - "Project search" link to help users find real-world usage examples of the library :0d
 - [RFC 164](#) - Compute transitive dependencies :2020-09-01, 0d
+- Reduce the complexity of adding your first repositories
+- Code insights
+- Sourcegraph extensions drive engagement among developers and engineering leaders
+- Lower the barrier of entry to using the browser extension & native integrations
+
+## Wishlist
+
+- Sourcegraph extensions - we have the infrastructure in place and a few good (non-code intelligence) extensions that are enjoyed by many users. We would love to continue to add additional context to code from other services and make those integrations top-notch.
+- Browser extension improvements
+  - Firefox warnings - getting the extension to meet the standards for Firefox add-ons (some background)
+  - Improving UX of the extension to make it feel like a natural part of the code host
+- Consistent search results - find a balance between speed and consistent ordering. It can be confusing to get different results each time a search is run, and we should show users the things they care about (prioritize recent repositories, popular repositories, or repositories that are owned by the team they are part of).
+- Add support for more code hosts with the browser extension (e.g., Bitbucket Cloud, Gerrit).
+- Code host integrations
+  - Provide search capabilities from the code host
+- IDE integrations
+  - Powering language support, including cross repository for organizations with thousands of repositories, or organizations with very large monorepos where individual projects are checked out locally.
+  - Adding more context to code using code intelligence, extensions, etc.
