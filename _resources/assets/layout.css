@@ -122,10 +122,10 @@ a:hover {
 	margin-bottom: 0;
 	margin-right: 0.5rem;
 }
-#search, #search-button {
+input#search, #search-button {
 	padding: 0.325rem;
 }
-#search {
+input#search {
 	-webkit-appearance: textfield;
 	border: solid 1px var(--border-color);
 	border-radius: 0;
