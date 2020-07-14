@@ -1,5 +1,7 @@
 # Product roadmap
 
+We strive for an outcome-based roadmap: each roadamp item should describe the problem we want to solve or outcome we want to achieve.
+
 <!-- Gantt chart syntax documentation: https://mermaid-js.github.io/mermaid/#/gantt -->
 
 <pre class="mermaid" data-rendered-width="150%" data-scroll-right="50%">
@@ -62,9 +64,17 @@ section Search
 
 ## Cloud
 
+### Product priorities
+
+- [Non-Git VCS](https://docs.google.com/document/d/1Y2xYbckAz5jlBePER_BarypeDfP3mjjX9bBOZm3ALqY/edit#heading=h.m60esa7uysvx)
+- Multi-tenancy
+- Ranking search results
+
 ### In progress/next
 
-- Index non-master branches :2020-05-01, 2020-07-20, 30d
+\* Estimates based on Keegan days
+
+- Index non-master branches :2020-05-01, 70d
 - Storing secrets securely :2020-06-29, 30d
 - [RFC 174](#) - HA postgres for Sourcegraph Cloud :2020-07-23, 10d
 - Scaling repo-updater :2020-06-22, 30d
@@ -137,6 +147,10 @@ To prioritize:
 [Distribution roadmap](https://github.com/sourcegraph/about/pull/1104)
 
 ## Search
+
+### Product priorities
+
+
 
 ### In progress/next
 
