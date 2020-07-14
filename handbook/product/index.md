@@ -12,7 +12,7 @@ The product team is newly growing, and consists of all product managers and prod
 - [Product designers](roles.md#product-designer)
   - [Rob Rhyne](../../../company/team/index.md#rob-rhyne)
   - [Alicja Suska](../../../company/team/index.md#alicja-suska-she-her)
-  - [Q. K.](../../../company/team/index.md#todo)
+  - [Q. K.](../../../company/team/index.md#todo) starting 2020-08-03
 
 ### [Roles and responsibilites](roles.md)
 
@@ -24,7 +24,7 @@ _Updated 2020-07-16_
 
 We are hiring for these roles:
 
-- +4 [Product Manager](https://github.com/sourcegraph/careers/blob/master/job-descriptions/product-manager.md)
+- +4 [Product Managers](https://github.com/sourcegraph/careers/blob/master/job-descriptions/product-manager.md)
 
 See [2021 Organizational plan](../engineering/2021_org.md) for more details on areas of ownership.
 
