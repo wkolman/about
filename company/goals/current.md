@@ -2,9 +2,11 @@
 
 ## Awesome open-source code search
 
+> **Outcome:** 
+
 ## 3x pipeline coverage
 
-> **Outcome:** Maintain a 3x ratio of (weighted pipeline with close date in the next 90 days) to (company sales plan in the next 90 days).
+> **Outcome:** Maintain a 3x ratio of (weighted pipeline with close date in the next 90 days) to (company sales plan in the next 90 days), for each of new IARR and expansion IARR.
 >
 > **Status:** TBD TODO(ericbm): make a dashboard to measure this
 
