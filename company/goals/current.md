@@ -8,7 +8,7 @@
 
 <iframe width=250 scrolling=no height=21 border=0 style="margin-bottom:-5px;border:none;display:inline-block" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0qwpuCmDGrc80esQ0efbwfbigk5B1BeoLbf6b_a4uPs1Jsdeost_ChBETeRXzsXJUpeszGgeboNyn/pubhtml/sheet?gid=0&amp;single=true&amp;widget=true&amp;headers=false&amp;range=I4"></iframe> ([sheet](https://docs.google.com/spreadsheets/d/1kgdFooinTG5tynUMd9MlJpi6W-BTuQobGI4mlGM6d8k/edit#gid=0))
 
-(By 2020-08-14, total pipeline (weighted, closing within 3 months) where the value prop is org-wide and not dependent on devs just using code search individually.)
+(By 2020-08-14, $1M total pipeline (weighted, closing within 3 months) where the value prop is org-wide and not dependent on devs just using code search individually.)
 
 We need to demonstrate org-wide value quickly and repeatably with product features (such as campaigns, code insights, and security/compliance), and communicate that value to the decision-maker.
 
