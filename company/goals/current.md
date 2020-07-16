@@ -12,7 +12,7 @@
 
 We need to demonstrate org-wide value quickly and repeatably with product features (such as campaigns, code insights, and security/compliance), and communicate that value to the decision-maker.
 
-Right now, the value of Sourcegraph to an organization is roughly proportional to the number of people using it. This means that value grows gradually, because it takes time for usage to spread. But if a single person uses it for organization-wide tasks (such as those that save time or fix problems for many people at once), the value of Sourcegraph is much greater and grows faster.
+Right now, the value of Sourcegraph to an organization is roughly proportional to the number of people using it. This means that value grows gradually, because it takes time for usage to spread. But if a single person uses it for organization-wide tasks (such as those that save time or fix problems for many people at once), the value of Sourcegraph is much greater and grows faster. That's what we need.
 
 Many Sourcegraph power users would say their individual usage of our code search is already valuable organization-wide. But this kind of argument isn't helpful for earning us a customer quickly because it takes time for a power user to gain that level of confidence. It also usually involves citing many specific, unrelated use cases for search, which makes the overall value prop sound complex to the decision-maker and bespoke for each organization.
 
