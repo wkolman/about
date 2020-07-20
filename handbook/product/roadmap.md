@@ -20,11 +20,8 @@ section Campaigns
     Backend - New campaigns flow :active, 2020-06-21, 12d
 
 section Cloud
-    Index non-master branches :2020-05-01, 70d
-    Storing secrets securely :2020-06-29, 30d
-    RFC 174 - HA postgres for Sourcegraph Cloud :2020-06-21, 10d
-    Scaling repo-updater :2020-06-21, 30d
-    Enforce license tiers :2020-06-21, 10d
+    Allow users and organizations to create external services :active, 2020-07-20, 30d
+    Store and handle external service and external account secrets securely :active, 2020-07-20, 30d
 
 section Code intel
     Clangd LSIF indexer :active, 2020-06-19, 20d
@@ -43,9 +40,12 @@ section Search
 
 ## Campaigns
 
+### Product priorities
+
+1. TO DO
+
 ### In progress/next
 
-- Add GitLab support :active, 2020-06-21, 12d
 - Frontend: New campaigns flow :active, 2020-06-21, 12d
 - Backend: New campaigns flow :active, 2020-06-21, 12d
 
@@ -66,25 +66,22 @@ section Search
 
 ### Product priorities
 
-- [Non-Git VCS](https://docs.google.com/document/d/1Y2xYbckAz5jlBePER_BarypeDfP3mjjX9bBOZm3ALqY/edit#heading=h.m60esa7uysvx)
-- Multi-tenancy
-- Ranking search results
+1. [Non-Git VCS](https://docs.google.com/document/d/1Y2xYbckAz5jlBePER_BarypeDfP3mjjX9bBOZm3ALqY/edit#heading=h.m60esa7uysvx)
+1. Multi-tenancy
 
 ### In progress/next
 
-\* Estimates based on Keegan days
-
-- Index non-master branches :2020-05-01, 70d
-- Storing secrets securely :2020-06-29, 30d
-- [RFC 174](#) - HA postgres for Sourcegraph Cloud :2020-07-23, 10d
-- Scaling repo-updater :2020-06-22, 30d
 - Enforce license tiers :2020-06-22, 10d
+- Storing secrets securely :2020-06-29, 30d
+- [RFC 162](#) - Devolve the site admin role :2020-06-20, 30d
+- Scaling repo-updater :2020-06-22, 30d
 
 ### Soon
 
+\* Estimates based on Keegan days
+
 - Support for non-Git VCS :2020-07-08, 0d
 - Streaming search support :2020-06-22, 45d
-- [RFC 162](#) - Devolve the site admin role :2020-09-01, 0d
 - [RFC 52](#) - Other security concerns :2020-08-01, 0d
 - Spike - investigate Gitaly as a replacement for gitserver :2020-08-01, 2d
 - [RFC 161](#) - Authentication management :2020-08-01, 0d
@@ -104,6 +101,14 @@ section Search
 - [RFC 178](#): Sourcegraph cloud authorization model :2020-09-01, 0d
 
 ## Code intel
+
+### Product priorities
+
+1. Precise code intelligence (Go, TypeScript) works for customer scale and deployment requirements
+1. Precise code intelligence for C++
+1. Precise code intelligence for Java
+1. Use precise intelligence to supplement ranked search results
+1. Provide the dependency graph for a repository
 
 ### In progress/next
 
@@ -150,7 +155,14 @@ To prioritize:
 
 ### Product priorities
 
-
+1. Evolve our search query syntax (OpenGrok parity)
+1. Version contexts v2
+1. Repogroup pages for enterprise
+1. Saved search expressions (previously search scopes)
+1. Search over my public repositories, repositories I have starred, and public repositories of organizations I am affiliated with.
+1. Search history
+1. [Saved searches/search notifications (PD 12)](https://docs.google.com/document/d/1D9Useap2CuPJmed7Htdoho4nyzM0MMT0LJL_MlhoMv4/edit)
+1. Ranked search results
 
 ### In progress/next
 
@@ -176,11 +188,11 @@ To prioritize:
 
 ### Product priorities
 
+1. Webapp consistency
 1. The extension registry is confusing and does not communicate it's value
 1. Many developers do not realize Sourcegraph has a browser extension
 1. A few high quality non-language intelligence extension would help communicate the value and opportunity of Sourcegraph extensions
-1. Webapp consistency
-1. 
+1. Code insights
 
 ### In progress/next
 
@@ -207,9 +219,7 @@ To prioritize:
 ## Wishlist
 
 - Sourcegraph extensions - we have the infrastructure in place and a few good (non-code intelligence) extensions that are enjoyed by many users. We would love to continue to add additional context to code from other services and make those integrations top-notch.
-- Browser extension improvements
-  - Firefox warnings - getting the extension to meet the standards for Firefox add-ons (some background)
-  - Improving UX of the extension to make it feel like a natural part of the code host
+- Improving UX of the browser extension to make it feel like a natural part of the code host
 - Consistent search results - find a balance between speed and consistent ordering. It can be confusing to get different results each time a search is run, and we should show users the things they care about (prioritize recent repositories, popular repositories, or repositories that are owned by the team they are part of).
 - Add support for more code hosts with the browser extension (e.g., Bitbucket Cloud, Gerrit).
 - Code host integrations
