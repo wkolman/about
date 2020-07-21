@@ -12,16 +12,26 @@
 
 <dl>
     <dt>Product priorities</dt>
-    <dd>An ordered list of problem statements or outcomes that product has evidence is important</dt>
+    <dd>An ordered list of problem statements or outcomes that product has evidence is important.</dt>
     <dt>Roadmap</dt>
-    <dd>The tasks and timeline for when each will be worked on</dt>
+    <dd>The tasks and timeline for when each will be worked on.</dt>
     <dt>Backlog</dt>
     <dd>The ordered list of items to be tackled after items on the roadmap are complete.</dt>
 </dl>
 
-## Product and engineering responsibilites
+## Responsibilites
 
-The product team is responsible for:
+Collaboration is at the core of how we think about product planning, and it takes input from all parts of the team to create a great product. Ownership is important for accountability and final decision making, and is why we define responsibilites. We think about ownership broken down by what and how:
+
+- What?
+  - Product: is it valuable?
+- How?
+  - Design: is it usable?
+  - Engineering: is it feasible?
+
+![product-engineering-design-triad](product-engineering-design-triad.jpg)
+
+The product manager is responsible for:
 
 - **Prioritization:** Setting and communicating high-level product priorities.
 - **User research and input:** Ensuring engineering teams get the right inputs (customer requirements, good ideas) and get design help. Aggregating and capturing customer feedback, and digging in deeper to learn more.
@@ -29,13 +39,18 @@ The product team is responsible for:
 
 Each engineering team, and the engineering manager specifically, is responsible for:
 
-- **Goal planning:**
+- **Goal planning:** Work with the team to create and update team goals.
 - **Development roadmap:** Creating and maintaining the roadmap for their team's product area (and asking product for help getting input or coming up with great ideas as needed). Figuring out what their team is working on, and prioritizing bugs, tech debt, and customer issues along with product related work.
 - **Collaboration:** Working with a designer on wires, mocks, and UX.
+- **Implementation:** Building and iterating on the solution.
+
+The designer is responsible for:
+
+- TO DO
 
 ## Lifecycle of an idea
 
-This is the rough lifecycle of an idea at Sourcegraph. 
+This is the rough lifecycle of an idea at Sourcegraph.
 
 ### 1. Problem identification
 
