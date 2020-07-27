@@ -64,14 +64,19 @@ section Search
 ### Product priorities
 
 1. Evolve our search query syntax (OpenGrok parity)
+1. Search home page
 1. Version contexts v2
+1. Deterministic and ranked search results
 1. Repogroup pages for enterprise
 1. Saved search expressions (previously search scopes)
 1. Search over my public repositories, repositories I have starred, and public repositories of organizations I am affiliated with.
 1. Search history
 1. [Saved searches/search notifications (PD 12)](https://docs.google.com/document/d/1D9Useap2CuPJmed7Htdoho4nyzM0MMT0LJL_MlhoMv4/edit)
 1. Ranked search results
-- Consistent search results - find a balance between speed and consistent ordering. It can be confusing to get different results each time a search is run, and we should show users the things they care about (prioritize recent repositories, popular repositories, or repositories that are owned by the team they are part of).
+
+  - Consistent search results - find a balance between speed and consistent ordering. It can be confusing to get different results each time a search is run, and we should show users the things they care about (prioritize recent repositories, popular repositories, or repositories that are owned by the team they are part of).
+
+1. Precise code intel aware search
 
 ## Web
 
