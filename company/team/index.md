@@ -392,7 +392,12 @@ To add yourself to this page, copy the following template, paste it at the end o
 - [gregg@sourcegraph.com](mailto:gregg@sourcegraph.com), [LinkedIn](https://www.linkedin.com/in/stonegregg)
 - Gregg lives in San Francisco with his wife Heather and two kids Liv & Gavin. He moved to San Francisco 13 years ago. He started his sales career at Salesforce, before moving on to several startup tech companies. He enjoys spending time with his family, golfing, hiking, swimming, and skiing. He grew up in NC and graduated from NC State with a degree in Finance.
 
-<!-- Paste *your* section above this line by following our template below:
+## Bill Kolman
+
+- Account Executive
+- New York, New York
+- [Bill@sourcegraph.com](mailto:Bill@sourcegraph.com), [LinkedIn](www.linkedin.com/in/william-kolman)
+- Bill is a born and raised New Yorker. He lives in New York City with his wife Renee, his daughter Olivia, and his dog Gurd. Bill has been in tech related sales since 2008, spending the past four years in early stage start ups, where he helped build the east region as the first sales hire in the territory. Bill is an avid bicyclist, so when he's not spreading the word on the awesomeness of Sourcegraph, he is probably on his bike exploring the 5 boroughs. <!-- Paste *your* section above this line by following our template below:
 
 ## Full Name (optional pronouns)
 
